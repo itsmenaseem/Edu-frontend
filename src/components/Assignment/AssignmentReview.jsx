@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { FiArrowLeft, FiX } from 'react-icons/fi';
 import { format } from 'date-fns';
 import api from '../../utils/api';
-import { getUploadUrl } from '../../utils/api';
 import Navbar from '../Layout/Navbar';
 import DetectionResults from '../Detection/DetectionResults';
 import Loader from '../Common/Loader';
@@ -65,12 +64,11 @@ const AssignmentReview = () => {
   };
 
   const handleDownloadSubmission = (sub) => {
-    const url = getUploadUrl(sub?.filePath);
-    if (!url) {
+    if (!sub?.filePath) {
       toast.info('No file was uploaded for this submission.');
       return;
     }
-    window.open(url, '_blank', 'noopener,noreferrer');
+    window.open(sub.filePath, '_blank', 'noopener,noreferrer');
   };
 
   if (loading) return (<><Navbar /><div className="main-content"><Loader text="Loading..." /></div></>);

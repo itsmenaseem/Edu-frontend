@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiX, FiSend, FiImage, FiLoader } from 'react-icons/fi';
 import { toast } from 'react-toastify';
-import api, { getUploadUrl } from '../../utils/api';
+import api from '../../utils/api';
 import { useAuth } from '../../context/AuthContext';
 import './ChatWindow.css';
 
@@ -22,8 +22,7 @@ const ChatWindow = ({ chatId, course, recipient, onClose }) => {
 
   const resolveImageUrl = (imageUrl) => {
     if (!imageUrl) return '';
-    if (/^https?:\/\//i.test(imageUrl)) return imageUrl;
-    return getUploadUrl(imageUrl);
+    return imageUrl;
   };
 
   const scrollToBottom = () => {

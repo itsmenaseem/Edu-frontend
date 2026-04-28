@@ -6,7 +6,6 @@ import {
   FiMenu, FiEye
 } from 'react-icons/fi';
 import api from '../../utils/api';
-import { getUploadUrl } from '../../utils/api';
 import { useAuth } from '../../context/AuthContext';
 import Navbar from '../Layout/Navbar';
 import Sidebar from '../Layout/Sidebar';
@@ -154,13 +153,11 @@ const TeacherDashboard = () => {
   };
 
   const handleDownloadSubmission = (sub) => {
-    const url = getUploadUrl(sub?.filePath);
-    if (!url) {
+    if (!sub?.filePath) {
       toast.info('No file was uploaded for this submission.');
       return;
     }
-    // Prefer a direct navigation so the browser downloads/opens natively.
-    window.open(url, '_blank', 'noopener,noreferrer');
+    window.open(sub.filePath, '_blank', 'noopener,noreferrer');
   };
 
   if (loading) {
